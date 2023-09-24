@@ -24,11 +24,13 @@ const getContactById = async (contactId) => {
   try {
     const contacts = await listContacts();
     const contact = contacts.find((contact) => contact.id === contactId);
-    return contact;
-  } catch {
+    return contact; 
+  } catch (error) {
     console.log(error);
+    throw error; 
   }
 };
+
 
 const removeContact = async (contactId) => {
   try {
@@ -36,8 +38,8 @@ const removeContact = async (contactId) => {
     const IndexContact = contacts.findIndex(
       (contact) => contact.id === contactId
     );
-
     contacts.splice(IndexContact, 1);
+    console.log(contacts);
     await fs.writeFile(DB_PATH, JSON.stringify(contacts, null, 2));
     return contacts[IndexContact];
   } catch {

@@ -49,6 +49,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
+    const { name, email, phone } = req.body;
     const { error } = schemaValidate.validate(req.body);
 
     if (Object.keys(req.body).length === 0) {
@@ -63,7 +64,7 @@ router.put("/:contactId", async (req, res, next) => {
       });
     }
 
-    const updatedContact = await updateContact(contactId, req.body);
+    const updatedContact = await updateContact(contactId, name, email, phone);
     res.json(updatedContact);
   } catch (error) {
     next(error);
