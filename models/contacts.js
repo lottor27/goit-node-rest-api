@@ -23,7 +23,9 @@ const listContacts = async () => {
 const getContactById = async (contactId) => {
   try {
     const contacts = await listContacts();
-    const contact = contacts.find((contact) => contact.id === contactId);
+    const contact = contacts.find(
+      (itemContact) => itemContact.id === contactId
+    );
     return contact; 
   } catch (error) {
     console.log(error);
@@ -36,7 +38,7 @@ const removeContact = async (contactId) => {
   try {
     const contacts = await listContacts();
     const IndexContact = contacts.findIndex(
-      (contact) => contact.id === contactId
+      (itemContact) => itemContact.id === contactId
     );
     contacts.splice(IndexContact, 1);
     console.log(contacts);
@@ -67,7 +69,7 @@ const updateContact = async (contactId, body) => {
   try {
     const contacts = await listContacts();
     const IndexContact = contacts.findIndex(
-      (contact) => contact.id === contactId
+      (itemContact) => itemContact.id === contactId
     );
     const updateContact = { ...contacts[IndexContact], ...body };
     contacts[IndexContact] = updateContact;
